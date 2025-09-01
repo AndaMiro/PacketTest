@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/mirinae.dir/src/mirinae/Mirinae.cpp.o CMakeFiles/mirinae.dir/src/mirinae/core/Server.cpp.o CMakeFiles/mirinae.dir/src/mirinae/network/UdpNetwork.cpp.o -o mirinae 
