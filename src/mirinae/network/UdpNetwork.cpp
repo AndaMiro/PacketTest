@@ -11,7 +11,7 @@ namespace mirinae::network{
 		stop();
 	}
 
-	void UdpNetwork::start(PacketCallBack cb){
+	void UdpNetwork::start(PacketCallBack&& cb){
 		if(running_.exchange(true)) return;
 		
 		cb_ = std::move(cb);

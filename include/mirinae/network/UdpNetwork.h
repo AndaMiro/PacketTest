@@ -14,7 +14,7 @@ namespace mirinae::network{
 			explicit UdpNetwork(unsigned short port = 19132);
 			~UdpNetwork() override;
 
-			void start(PacketCallBack cb) override;
+			void start(PacketCallBack&& cb) override;
 			void stop() override;
 			void send(const Endpoint& to, const Buffer& buf) override;
 
