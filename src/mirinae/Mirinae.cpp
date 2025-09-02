@@ -18,7 +18,7 @@ int main(int argc, char** argv){
         catch(...){ std::cerr << "Invalid port; using default 19132\n"; }
     }
 
-    auto net = mirinae::MakeUdpNetwork(port);
+    auto net = mirinae::network::MakeUdpNetwork(port);
     mirinae::Server server(std::move(net));
 
     std::thread stopper([&](){
