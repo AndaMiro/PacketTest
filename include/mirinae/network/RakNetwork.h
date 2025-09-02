@@ -9,11 +9,11 @@ namespace mirinae::network{
 
             void start();
             void stop();
-            void send(Endpoint to, const Buffer& buf);
+            void send(Endpoint& to, const Buffer& buf);
 
             Endpoint connect(const Endpoint& remote);
             void disconnect(Endpoint);
-            void onReceive(const void* data);
+            void onReceive(const Endpoint& endpoint, const void* data, std::size_t n);
 
         private :
             std::unique_ptr<UdpNetwork> udp_;

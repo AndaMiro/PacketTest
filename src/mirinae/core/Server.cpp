@@ -10,9 +10,9 @@ namespace mirinae{
     Server::~Server() = default;
 
     void Server::run(){
-        net_->start([this](const void* data){
+        /*net_->start([this](const void* data){
             //this->onPacket(id, data, len, session);
-        });
+        });*/
 
         auto next = std::chrono::steady_clock::now();
         constexpr auto dt = 50ms;
