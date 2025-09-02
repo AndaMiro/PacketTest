@@ -2,12 +2,14 @@
 #include <mirinae/network/UdpNetwork.h>
 
 namespace mirinae::network{
+	using PacketCallback = std::function<void(const Endpoint& endpoint, const int id, const void* data, std::size_t n)>;
+
     class RakNetwork{
         public :
             explicit RakNetwork(std::unique_ptr<UdpNetwork> udp);
 			//~RakNetwork() override;
 
-            void start();
+            void start(PacketCallback&& cb);
             void stop();
             void send(Endpoint& to, const Buffer& buf);
 
@@ -17,5 +19,6 @@ namespace mirinae::network{
 
         private :
             std::unique_ptr<UdpNetwork> udp_;
+            PacketCallback cb_;
     };
 }

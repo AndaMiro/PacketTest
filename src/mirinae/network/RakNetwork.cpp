@@ -4,7 +4,8 @@ namespace mirinae::network{
     RakNetwork::RakNetwork(std::unique_ptr<UdpNetwork> udp)
 		: udp_(std::move(udp)){}
 
-    void RakNetwork::start(){
+    void RakNetwork::start(PacketCallback&& cb){
+      cb_ = std::move(cb);
       udp_->start([this](const Endpoint& endpoint, const void* data, std::size_t n){
         this->onReceive(endpoint, data, n);
       });
