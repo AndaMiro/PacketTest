@@ -26,15 +26,6 @@ namespace mirinae{
 			asio::ip::udp::socket socket_;
 			std::thread ioThread_;
 			std::atomic_bool running_{false};
-			PacketCallback cb_;
-
-			std::array<std::uint8_t, 1500> rxBuf_{};
-			Endpoint rxRemote_{};
-
-			std::mutex mu_;
-			std::unordered_map<uintptr_t, Endpoint> id2ep_;
-			std::unordered_map<std::string, uintptr_t> ep2id_;
-			uintptr_t nextId_{1};
 	};
 
 	inline std::unique_ptr<INetwork> MakeUdpNetwork(unsigned short port = 19132){
