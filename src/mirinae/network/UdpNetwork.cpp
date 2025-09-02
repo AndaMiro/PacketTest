@@ -3,7 +3,7 @@
 #include <memory>
 #include <string>
 
-namespace mirinae{
+namespace mirinae::network{
 	UdpNetwork::UdpNetwork(unsigned short port) 
 		: socket_(io_, Endpoint(asio::ip::udp::v4(), port)){}
 
@@ -11,10 +11,11 @@ namespace mirinae{
 		stop();
 	}
 
-	void UdpNetwork::start(){
+	void UdpNetwork::start(PacketCallBack cb){
 		if(running_.exchange(true)) return;
 		
-		doReceive();
+		cb_ = std::move(cb);
+		receivePacket();
 		ioThread_ = std::thread([this]{
 			try{ io_.run(); }
 			catch(const std::exception& e){
@@ -39,5 +40,22 @@ namespace mirinae{
 
 	void UdpNetwork::send(const Endpoint& to, const Buffer& buf){
 		socket_.async_send_to(asio::buffer(*buf), to, [buf](std::error_code /*ec*/, std::size_t /*n*/){ /*Call back*/ });
+	}
+
+	void UdpNetwork::receivePacket(){
+		socket_.async_receive_from(asio::buffer(rxBuf_), rxRemote_, [this](std::error_code ec, std::size_t n){
+			if(!running_.load()) return;
+
+			if(ec){
+				if(ec != asio::error::operation_aborted) std::cerr << "[net] recv error: " << ec.message() << "\n";
+
+				if(running_.load()) receivePacket();
+				return;
+			}
+
+			if(n >= 1 && cb_) cb_(rxBuf_.data());
+
+			receivePacket();
+		});
 	}
 }

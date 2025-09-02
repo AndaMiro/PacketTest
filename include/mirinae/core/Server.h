@@ -4,6 +4,8 @@
 #include <chrono>
 #include <memory>
 
+using namespace mirinae::network;
+
 namespace mirinae{
     class Server{
         public : 

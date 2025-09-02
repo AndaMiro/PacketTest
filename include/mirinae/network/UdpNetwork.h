@@ -8,24 +8,26 @@
 #include <unordered_map>
 #include <vector>
 
-namespace mirinae{
+namespace mirinae::network{
 	class UdpNetwork final : public INetwork{
 		public :
 			explicit UdpNetwork(unsigned short port = 19132);
 			~UdpNetwork() override;
 
-			void start() override;
+			void start(PacketCallBack cb) override;
 			void stop() override;
 			void send(const Endpoint& to, const Buffer& buf) override;
 
 		private :
-			void doReceive();
-			uintptr_t ensureSessionId(const Endpoint& ep);
+			void receivePacket();
 
 			asio::io_context io_;
 			asio::ip::udp::socket socket_;
 			std::thread ioThread_;
 			std::atomic_bool running_{false};
+			PacketCallBack cb_;
+			std::array<std::uint8_t, 1500> rxBuf_{};
+        	asio::ip::udp::endpoint rxRemote_{};
 	};
 
 	inline std::unique_ptr<INetwork> MakeUdpNetwork(unsigned short port = 19132){

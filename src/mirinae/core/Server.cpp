@@ -10,8 +10,8 @@ namespace mirinae{
     Server::~Server() = default;
 
     void Server::run(){
-        net_->start([this](int id, const void* data, size_t len, uintptr_t session){
-            this->onPacket(id, data, len, session);
+        net_->start([this](const void* data){
+            //this->onPacket(id, data, len, session);
         });
 
         auto next = std::chrono::steady_clock::now();
@@ -36,7 +36,7 @@ namespace mirinae{
             case protocol::PK_PING :
             {
                 static constexpr char pong[] = "pong";
-                net_->send(protocol::PK_PONG, pong, sizeof(pong) - 1, session);
+                //net_->send(protocol::PK_PONG, pong, sizeof(pong) - 1, session);
                 break;
             }
 

@@ -1,9 +1,8 @@
 {
   "configurations": [
     {
-      "name": "mingw-ucrt64",
-      "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
-      "intelliSenseMode": "windows-gcc-x64",
+      "name": "g++",
+      "compilerPath": "/usr/bin/g++",
       "cStandard": "c17",
       "cppStandard": "c++20",
       "includePath": [
