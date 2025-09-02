@@ -7,7 +7,7 @@
 namespace mirinae::network{
 	using Endpoint = asio::ip::udp::endpoint;
 	using Buffer = std::shared_ptr<const std::vector<std::uint8_t>>;
-	using PacketCallBack = std::function<void(const void* data)>;
+	using PacketCallBack = std::function<void(const Endpoint& endpoint, const void* data, std::size_t n)>;
 
 	class INetwork{
 		public : 

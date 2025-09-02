@@ -53,7 +53,7 @@ namespace mirinae::network{
 				return;
 			}
 
-			if(n >= 1 && cb_) cb_(rxBuf_.data());
+			if(n >= 1 && cb_) cb_(rxRemote_, rxBuf_.data(), n);
 
 			receivePacket();
 		});

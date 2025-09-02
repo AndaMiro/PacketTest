@@ -13,11 +13,9 @@ namespace mirinae::network{
 
             Endpoint connect(const Endpoint& remote);
             void disconnect(Endpoint);
-            // onReceive(SessionId from, std::span<const uint8_t>) 콜백
+            void onReceive(const void* data);
 
         private :
             std::unique_ptr<UdpNetwork> udp_;
-            std::array<std::uint8_t, 1500> rxBuf_{};
-			Endpoint rxRemote_{};
     };
 }
