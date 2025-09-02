@@ -27,7 +27,7 @@ namespace mirinae::network{
 			std::atomic_bool running_{false};
 			PacketCallBack cb_;
 			std::array<std::uint8_t, 1500> rxBuf_{};
-        	asio::ip::udp::endpoint rxRemote_{};
+        	Endpoint rxRemote_{};
 	};
 
 	inline std::unique_ptr<INetwork> MakeUdpNetwork(unsigned short port = 19132){
