@@ -14,9 +14,11 @@ namespace mirinae::network{
 			explicit UdpNetwork(unsigned short port = 19132);
 			~UdpNetwork() override;
 
-			void start(UdpCallback&& cb) override;
+			void start() override;
 			void stop() override;
 			void send(const Endpoint& to, const Buffer& buf) override;
+
+			void setReceiveHandler(UdpCallback&& cb);
 
 		private :
 			void receivePacket();
@@ -27,7 +29,7 @@ namespace mirinae::network{
 			std::atomic_bool running_{false};
 			UdpCallback cb_;
 			std::array<std::uint8_t, 1500> rxBuf_{};
-        	Endpoint rxRemote_{};
+			Endpoint rxRemote_{};
 	};
 
 	inline std::unique_ptr<INetwork> MakeUdpNetwork(unsigned short port = 19132){

@@ -11,10 +11,9 @@ namespace mirinae::network{
 		stop();
 	}
 
-	void UdpNetwork::start(UdpCallback&& cb){
+	void UdpNetwork::start(){
 		if(running_.exchange(true)) return;
 		
-		cb_ = std::move(cb);
 		receivePacket();
 		ioThread_ = std::thread([this]{
 			try{ io_.run(); }
@@ -40,6 +39,10 @@ namespace mirinae::network{
 
 	void UdpNetwork::send(const Endpoint& to, const Buffer& buf){
 		socket_.async_send_to(asio::buffer(*buf), to, [buf](std::error_code /*ec*/, std::size_t /*n*/){ /*Call back*/ });
+	}
+
+	void UdpNetwork::setReceiveHandler(UdpCallback&& cb){
+		cb_ = std::move(cb);
 	}
 
 	void UdpNetwork::receivePacket(){

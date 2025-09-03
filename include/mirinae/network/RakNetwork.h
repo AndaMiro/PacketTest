@@ -9,7 +9,7 @@ namespace mirinae::network{
             explicit RakNetwork(std::unique_ptr<UdpNetwork> udp);
 			//~RakNetwork() override;
 
-            void start(PacketCallback&& cb);
+            void start();
             void stop();
             void send(Endpoint& to, const Buffer& buf);
 

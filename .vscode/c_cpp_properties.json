@@ -2,7 +2,7 @@
   "configurations": [
     {
       "name": "g++",
-      "compilerPath": "/usr/bin/g++",
+      "compilerPath": "C:/msys64/ucrt64/bin/g++",
       "cStandard": "c17",
       "cppStandard": "c++20",
       "includePath": [

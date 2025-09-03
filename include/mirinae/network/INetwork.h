@@ -13,7 +13,7 @@ namespace mirinae::network{
 		public : 
 			virtual ~INetwork() = default;
 
-			virtual void start(UdpCallback&& cb) = 0;
+			virtual void start() = 0;
 			virtual void stop() = 0;
 			virtual void send(const Endpoint& to, const Buffer& buf) = 0;
 	};
