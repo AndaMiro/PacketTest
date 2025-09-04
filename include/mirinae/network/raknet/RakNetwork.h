@@ -1,7 +1,7 @@
 #pragma once
 #include <mirinae/network/UdpNetwork.h>
 
-namespace mirinae::network{
+namespace mirinae::network::raknet{
 	using PacketCallback = std::function<void(const Endpoint& endpoint, const int id, const void* data, std::size_t n)>;
 
     class RakNetwork{
