@@ -1,9 +1,7 @@
 #include <mirinae/core/Server.h>
 #include <mirinae/network/UdpNetwork.h>
-#include <atomic>
 #include <csignal>
 #include <iostream>
-#include <memory>
 
 static std::atomic_bool g_quit{false};
 static void onSignal(int){ g_quit.store(true); }

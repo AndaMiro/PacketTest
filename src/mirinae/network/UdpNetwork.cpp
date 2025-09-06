@@ -1,7 +1,5 @@
 #include <mirinae/network/UdpNetwork.h>
 #include <iostream>
-#include <memory>
-#include <string>
 
 namespace mirinae::network{
 	UdpNetwork::UdpNetwork(unsigned short port) 

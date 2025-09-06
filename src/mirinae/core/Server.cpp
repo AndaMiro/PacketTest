@@ -1,7 +1,6 @@
 #include <mirinae/core/Server.h>
 #include <mirinae/protocol/PacketIds.h>
 #include <iostream>
-#include <thread>
 
 using namespace std::chrono_literals;
 
